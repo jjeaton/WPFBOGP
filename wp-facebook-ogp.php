@@ -133,7 +133,7 @@ function wpfbogp_build_head() {
 		// do descriptions
 		if ( is_singular() ) {
 			if ( has_excerpt( $post->ID ) ) {
-				$wpfbogp_description = strip_tags( get_the_excerpt( $post->ID ) );
+				$wpfbogp_description = strip_tags( get_the_excerpt() );
 			} else {
 				$wpfbogp_description = str_replace( "\r\n", ' ' , substr( strip_tags( strip_shortcodes( $post->post_content ) ), 0, 160 ) );
 			}
