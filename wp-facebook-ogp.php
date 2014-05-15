@@ -158,7 +158,13 @@ function wpfbogp_build_head() {
 			// Find featured thumbnail of the current post/page
 			if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail( $post->ID ) ) {
 				$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
-				$wpfbogp_images[] = $thumbnail_src[0]; // Add to images array
+				$link = $thumbnail_src[0];
+				if ( ! preg_match( '/^https?:\/\//', $link ) ) {
+					// Remove any starting slash with ltrim() and add one to the end of site_url()
+					$link = site_url( '/' ) . ltrim( $link, '/' );
+				}
+
+				$wpfbogp_images[] = $link; // Add to images array
 			}
 			
 			if ( wpfbogp_find_images() !== false && is_singular() ) { // Use our function to find post/page images
